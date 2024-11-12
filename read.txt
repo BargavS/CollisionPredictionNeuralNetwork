@@ -1,1 +1,48 @@
+This project is segmented into four parts although we will
+dive into Part 4 in detail; that consists of all the complete
+project. The project basically comprises of finding a heuristic
+and defining a Neural network model that could guide a robot
+into moving within an environment without colliding into an
+obstacle(in our case, walls). The Collision prediction task is
+done as a 4 step process:
+1. Collection of Dataset: Collect_data.py
+The objective is to collect a large amount of training and
+testing dataset to form the heuristics. The data collected by
+running the simulation are 5 distance measurements from
+Sensors, 1 information on the action that the robot takes for
+the given sensor measurements and if a collision occurred
+or not for the measurement. A set of 14,000 data has been collected for this project 
 
+2. Preprocessing of Data: DataLoader.py:
+The data loader class comprises of two classes Nav_Dataset()
+and Data_Loaders(). The Nav_dataset() class obtains the data
+from training_data.csv and normalizes the data to improve the
+accuracy and reduce the increased variance in the data
+distribution. The class also returns a tensor dataset of each
+element in form of dictionary that has {“input”: tensor(),
+’label’: }. The class DataLoader() splits the dataset into 80%
+training and 20% testing dataset as a tensor according to
+batch size and stratifying the number of positives and
+negatives into two data loaders called self.train_loader and
+self.test_loader. 
+
+3. Designing the Neural Network: Network.py:
+The design of neural network involves initialising the model
+and defining the input, hidden layers and output layers. In this
+report, we have defined a design that consists of two hidden
+layers(16 neurons in the first and 32 neurons in the second),
+one Input layer with 6 neurons and one output layer. The second step is to define a forward propagation for
+the model. In this design, the input to first hidden layer and
+first hidden to the second layer consists of a reLu activation
+function and the second  to output layer consist of a Sigmoid
+activation function.
+
+4. Training the Model: train_model.py:
+The training requires updating the weights at each step or the
+backpropagation which navigates through the network and
+predicts the error using a loss function and an Optimization
+problem to minimise the error. The algorithm used to optimize
+is the gradient descent algorithm. In optimisation algorithm,
+the candidate solution is called the objective function and this
+candidate solution is either calculated using Mean square loss
+or the Cross Entropy. 
